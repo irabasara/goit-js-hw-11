@@ -7,7 +7,7 @@ body {
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fafafa;
+  background-color: #f9f6f6dc;
   color: #212121;
   line-height: 1.5;
 }
@@ -15,4 +15,36 @@ body {
 img {
   display: block;
   max-width: 100%;
+}
+.search-form input {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 24;
+  padding: 10px;
+}
+
+.search-form button {
+  display: block;
+  margin: 15px auto;
+  background-color: white;
+  color: grey;
+  font-size: 20px;
+  border-radius: 2px;
+  border-width: 1px;
+}
+
+.gallery {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.info-item {
+  margin: 5px;
+}
+
+.photo-card {
+  box-shadow: 2px 5px 15px 1px rgba(34, 60, 80, 0.2);
 }

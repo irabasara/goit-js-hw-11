@@ -1,65 +1,55 @@
-export const galleryItems = [
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820_1280.jpg',
-    description: 'Hokkaido Flower',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677_1280.jpg',
-    description: 'Container Haulage Freight',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785_1280.jpg',
-    description: 'Aerial Beach View',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619_1280.jpg',
-    description: 'Flower Blooms',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334_1280.jpg',
-    description: 'Alpine Mountains',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571_1280.jpg',
-    description: 'Mountain Lake Sailing',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272_1280.jpg',
-    description: 'Alpine Spring Meadows',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255_1280.jpg',
-    description: 'Nature Landscape',
-  },
-  {
-    preview:
-      'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843__340.jpg',
-    original:
-      'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg',
-    description: 'Lighthouse Coast Sea',
-  },
-];
+import axios from 'axios';
+
+const buttonLoadMore = document.querySelector('.load-more');
+const searchForm = document.querySelector('#search-form');
+const searchButton = document.querySelector('button[type=submit]');
+const gallery = document.querySelector('.gallery');
+console.log(searchButton);
+
+searchForm.addEventListener('submit', onSearchFormSubmit);
+
+async function onSearchFormSubmit(event) {
+  event.preventDefault();
+  const name = event.currentTarget.elements.searchQuery.value;
+  await axios
+    .get(
+      `https://pixabay.com/api/?key=36518003-e50cc2d75c5794a64cca810ae&q=${name}&image_type=photo&orientation=horizontal&safesearch=true`
+    )
+    .then(resp => {
+      gallery.innerHTML = createMarkup(resp.data.hits);
+    })
+    .catch(error => console.log(error));
+}
+
+function createMarkup(arr) {
+  return arr.map(
+    ({
+      webformatURL,
+      // largeImageURL,
+      tags,
+      likes,
+      views,
+      comments,
+      downloads,
+    }) => {
+      return `
+    <div class="photo-card">
+  <img src="${webformatURL}" alt="${tags}" loading="lazy" width=300 height=200/>
+  <div class="info">
+    <p class="info-item">
+      <b>Likes : </b>${likes}
+    </p>
+    <p class="info-item">
+      <b>Views : </b>${views}
+    </p>
+    <p class="info-item">
+      <b>Comments : </b>${comments}
+    </p>
+    <p class="info-item">
+      <b>Downloads : </b>${downloads}
+    </p>
+  </div>
+</div>`;
+    }
+  );
+}
