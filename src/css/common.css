@@ -8,7 +8,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f9f6f6dc;
-  color: #212121;
+  color: rgb(80, 80, 80);
   line-height: 1.5;
 }
 
@@ -32,6 +32,15 @@ img {
   font-size: 20px;
   border-radius: 2px;
   border-width: 1px;
+  padding: 7px;
+  cursor: pointer;
+  transition: color 300ms ease, background-color 300ms ease;
+}
+
+.search-form button:hover,
+.search-form button:focus {
+  background-color: gray;
+  color: white;
 }
 
 .gallery {
