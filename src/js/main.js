@@ -34,12 +34,13 @@ function onSearchFormSubmit(event) {
       }
 
       gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
+      lightbox.refresh();
     })
     .catch(error => console.log(error));
-  lightbox.refresh();
 
   clearMarkup();
 }
+
 function onLoadMoreClick() {
   image
     .fetchImages()
@@ -59,7 +60,6 @@ function onLoadMoreClick() {
     })
     .catch(error => console.log(error));
   btnNothidden();
-  lightbox.refresh();
 }
 
 function clearMarkup() {
