@@ -26,6 +26,7 @@ function onSearchFormSubmit(event) {
       btnNothidden();
 
       if (hits.length === 0 || image.query === '') {
+        btnIshidden();
         return Report.info(
           'INFO',
           'Sorry, there are no images matching your search query. Please try again.'
@@ -45,6 +46,7 @@ function onLoadMoreClick() {
     .then(({ hits, totalHits }) => {
       btnNothidden();
       if (image.perPage >= totalHits) {
+        btnIshidden();
         return Report.info(
           'INFO',
           "We're sorry, but you've reached the end of search results."
