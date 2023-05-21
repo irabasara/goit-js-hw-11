@@ -32,6 +32,7 @@ img {
 
 .search-form input {
   background-color: #6d47ae;
+  color: rgb(253, 253, 253);
   border: none;
   font-size: 20px;
   border-radius: 5px;

@@ -30,9 +30,9 @@ export default class Image {
     }
   }
 
-  // incrementHits(hits) {
-  //   this.perPage += hits.length;
-  // }
+  incrementHits(hits) {
+    this.perPage += hits.length;
+  }
 
   // resetLoadedHits() {
   //   this.loadedHits = 0;
