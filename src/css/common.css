@@ -83,4 +83,26 @@ img {
 
 .photo-card {
   box-shadow: 2px 5px 15px 1px rgba(80, 34, 77, 0.2);
+  height: 280px;
+}
+
+.box {
+  text-align: center;
+  font-size: 30px;
+  background: rgb(95, 150, 196);
+  background: radial-gradient(
+    circle,
+    rgba(95, 150, 196, 1) 0%,
+    rgba(107, 90, 153, 1) 100%
+  );
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: fixed;
+  left: 94%;
+  top: 87%;
+}
+
+.box:hover {
+  cursor: pointer;
 }

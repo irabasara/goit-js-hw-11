@@ -14,6 +14,8 @@ function onSearchFormSubmit(event) {
   event.preventDefault();
   image.query = event.currentTarget.elements.searchQuery.value;
   image.resetPage();
+  observer.unobserve(refs.target);
+
   image
     .fetchImages()
     .then(({ hits }) => {
@@ -34,7 +36,6 @@ function onSearchFormSubmit(event) {
 
 function clearMarkup() {
   refs.gallery.innerHTML = '';
-  console.log('clear');
 }
 
 let options = {
@@ -50,6 +51,12 @@ function onLoad(entries, observer) {
       image
         .fetchImages()
         .then(({ hits, totalHits }) => {
+          // if (observer.observe) {
+          //   refs.fastScrollUp.hidden = false;
+          //   refs.fastScrollUp.addEventListener('click', () => {
+          //     smoothScrollGallery(refs.searchForm);
+          //   });
+          // }
           if (image.perPage >= totalHits) {
             observer.unobserve(refs.target);
 
@@ -60,9 +67,17 @@ function onLoad(entries, observer) {
           }
 
           refs.gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
+          smoothScrollGallery();
           image.incrementHits(hits);
         })
         .catch(error => console.log(error));
     }
+  });
+}
+
+function smoothScrollGallery(el) {
+  window.scroll({
+    top: el.offsetTop,
+    behavior: 'smooth',
   });
 }
