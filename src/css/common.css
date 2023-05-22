@@ -42,8 +42,7 @@ img {
   color: rgb(253, 253, 253);
 }
 
-.search-form button,
-.load-more {
+.search-form button {
   border: none;
   color: rgb(253, 253, 253);
   background-color: #6d47ae;
