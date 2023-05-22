@@ -13,7 +13,6 @@ refs.searchForm.addEventListener('submit', onSearchFormSubmit);
 function onSearchFormSubmit(event) {
   event.preventDefault();
   image.query = event.currentTarget.elements.searchQuery.value;
-  clearMarkup();
   image.resetPage();
   image
     .fetchImages()
@@ -30,6 +29,7 @@ function onSearchFormSubmit(event) {
       lightbox.refresh();
     })
     .catch(error => console.log(error));
+  clearMarkup();
 }
 
 function clearMarkup() {
@@ -52,6 +52,7 @@ function onLoad(entries, observer) {
         .then(({ hits, totalHits }) => {
           if (image.perPage >= totalHits) {
             observer.unobserve(refs.target);
+
             return Report.info(
               'INFO',
               "We're sorry, but you've reached the end of search results."
@@ -59,7 +60,6 @@ function onLoad(entries, observer) {
           }
 
           refs.gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
-
           image.incrementHits(hits);
         })
         .catch(error => console.log(error));

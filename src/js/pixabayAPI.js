@@ -7,7 +7,7 @@ export default class Image {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
-    this.perPage = 0;
+    this.perPage = 40;
   }
 
   async fetchImages() {
