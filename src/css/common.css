@@ -7,7 +7,7 @@ body {
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #c8b8da;
+  background-color: #ddd6e6;
   color: rgb(80, 80, 80);
   line-height: 1.5;
   margin: 0;
@@ -20,7 +20,12 @@ img {
 .search-form {
   width: 100%;
   height: 100%;
-  /* background-color: #90b7b4; */
+  background: rgb(95, 150, 196);
+  background: radial-gradient(
+    circle,
+    rgba(95, 150, 196, 1) 0%,
+    rgba(107, 90, 153, 1) 100%
+  );
   padding: 20;
   display: flex;
   justify-content: center;
@@ -31,6 +36,7 @@ img {
 }
 
 .search-form input {
+  outline: none;
   background-color: #6d47ae;
   color: rgb(253, 253, 253);
   border: none;
@@ -55,7 +61,7 @@ img {
 
 .search-form button:hover,
 .search-form button:focus {
-  color: #c8b8da;
+  color: rgb(221, 217, 217);
 }
 
 .gallery {
@@ -77,22 +83,4 @@ img {
 
 .photo-card {
   box-shadow: 2px 5px 15px 1px rgba(80, 34, 77, 0.2);
-}
-
-.load-more {
-  display: block;
-  border: none;
-  color: rgb(253, 253, 253);
-  background-color: #6d47ae;
-  font-size: 26px;
-  border-radius: 5px;
-  padding: 7;
-  cursor: pointer;
-  transition: color 300ms ease, background-color 300ms ease;
-  margin: 20 auto;
-}
-
-.load-more button:hover,
-.load-more button:focus {
-  color: #c8b8da;
 }
