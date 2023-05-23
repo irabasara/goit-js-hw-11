@@ -1,3 +1,4 @@
+import { refs } from './refs';
 function smoothScrollGallery(el) {
   window.scroll({
     top: el.offsetTop,
