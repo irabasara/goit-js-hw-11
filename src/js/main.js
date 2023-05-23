@@ -1,6 +1,9 @@
 import Image from './pixabayAPI';
 import createMarkup from './markup';
 import refs from './refs';
+// import smoothScrollGallery from './scroll';
+import upButtonVisible from './scroll';
+
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { Report } from 'notiflix';
@@ -51,12 +54,8 @@ function onLoad(entries, observer) {
       image
         .fetchImages()
         .then(({ hits, totalHits }) => {
-          // if (observer.observe) {
-          //   refs.fastScrollUp.hidden = false;
-          //   refs.fastScrollUp.addEventListener('click', () => {
-          //     smoothScrollGallery(refs.searchForm);
-          //   });
-          // }
+          upButtonVisible();
+
           if (image.perPage >= totalHits) {
             observer.unobserve(refs.target);
 
@@ -67,7 +66,8 @@ function onLoad(entries, observer) {
           }
 
           refs.gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
-          smoothScrollGallery();
+          lightbox.refresh();
+
           image.incrementHits(hits);
         })
         .catch(error => console.log(error));
@@ -75,9 +75,20 @@ function onLoad(entries, observer) {
   });
 }
 
-function smoothScrollGallery(el) {
-  window.scroll({
-    top: el.offsetTop,
-    behavior: 'smooth',
-  });
-}
+// function smoothScrollGallery(el) {
+//   window.scroll({
+//     top: el.offsetTop,
+//     behavior: 'smooth',
+//   });
+// }
+
+// function upButtonVisible() {
+//   refs.fastScrollUp.hidden = false;
+//   setTimeout(() => {
+//     refs.fastScrollUp.hidden = true;
+//   }, 5000);
+
+//   refs.fastScrollUp.addEventListener('click', () => {
+//     smoothScrollGallery(refs.searchForm);
+//   });
+// }
