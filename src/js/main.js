@@ -1,7 +1,6 @@
 import Image from './pixabayAPI';
 import createMarkup from './markup';
 import refs from './refs';
-// import smoothScrollGallery from './scroll';
 import upButtonVisible from './scroll';
 
 import SimpleLightbox from 'simplelightbox';
@@ -74,21 +73,3 @@ function onLoad(entries, observer) {
     }
   });
 }
-
-// function smoothScrollGallery(el) {
-//   window.scroll({
-//     top: el.offsetTop,
-//     behavior: 'smooth',
-//   });
-// }
-
-// function upButtonVisible() {
-//   refs.fastScrollUp.hidden = false;
-//   setTimeout(() => {
-//     refs.fastScrollUp.hidden = true;
-//   }, 5000);
-
-//   refs.fastScrollUp.addEventListener('click', () => {
-//     smoothScrollGallery(refs.searchForm);
-//   });
-// }
