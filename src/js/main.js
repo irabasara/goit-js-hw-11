@@ -1,6 +1,6 @@
 import Pixabay from './pixabayAPI';
 import createMarkup from './markup';
-import refs from './refs';
+import { refs } from './refs';
 import upButtonVisible from './scroll';
 
 import SimpleLightbox from 'simplelightbox';
