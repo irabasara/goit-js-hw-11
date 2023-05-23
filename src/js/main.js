@@ -50,14 +50,14 @@ let observer = new IntersectionObserver(onLoad, options);
 function onLoad(entries, observer) {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
+      upButtonVisible();
       image
         .fetchImages()
         .then(({ hits, totalHits }) => {
-          upButtonVisible();
-
-          if (image.perPage >= totalHits) {
+          const maxImageOnPage = 480;
+          if (image.perPage >= maxImageOnPage || image.perPage >= totalHits) {
             observer.unobserve(refs.target);
-
+            upButtonVisible();
             return Report.info(
               'INFO',
               "We're sorry, but you've reached the end of search results."
