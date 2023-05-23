@@ -1,4 +1,4 @@
-import Image from './pixabayAPI';
+import Pixabay from './pixabayAPI';
 import createMarkup from './markup';
 import refs from './refs';
 import upButtonVisible from './scroll';
@@ -7,21 +7,21 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { Report } from 'notiflix';
 
-const image = new Image();
+const pixabay = new Pixabay();
 const lightbox = new SimpleLightbox('.gallery a');
 
 refs.searchForm.addEventListener('submit', onSearchFormSubmit);
 
 function onSearchFormSubmit(event) {
   event.preventDefault();
-  image.query = event.currentTarget.elements.searchQuery.value;
-  image.resetPage();
+  pixabay.query = event.currentTarget.elements.searchQuery.value;
+  pixabay.resetPage();
   observer.unobserve(refs.target);
 
-  image
+  pixabay
     .fetchImages()
     .then(({ hits }) => {
-      if (hits.length === 0 || image.query === '') {
+      if (hits.length === 0 || pixabay.query === '') {
         return Report.info(
           'INFO',
           'Sorry, there are no images matching your search query. Please try again.'
@@ -51,11 +51,14 @@ function onLoad(entries, observer) {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       upButtonVisible();
-      image
+      pixabay
         .fetchImages()
         .then(({ hits, totalHits }) => {
           const maxImageOnPage = 480;
-          if (image.perPage >= maxImageOnPage || image.perPage >= totalHits) {
+          if (
+            pixabay.perPage >= maxImageOnPage ||
+            pixabay.perPage >= totalHits
+          ) {
             observer.unobserve(refs.target);
             upButtonVisible();
             return Report.info(
@@ -67,7 +70,7 @@ function onLoad(entries, observer) {
           refs.gallery.insertAdjacentHTML('beforeend', createMarkup(hits));
           lightbox.refresh();
 
-          image.incrementHits(hits);
+          pixabay.incrementHits(hits);
         })
         .catch(error => console.log(error));
     }
