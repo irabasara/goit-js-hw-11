@@ -13,6 +13,8 @@ const lightbox = new SimpleLightbox('.gallery a');
 refs.searchForm.addEventListener('submit', onSearchFormSubmit);
 
 function onSearchFormSubmit(event) {
+  console.log('submit');
+
   event.preventDefault();
   pixabay.query = event.currentTarget.elements.searchQuery.value;
   pixabay.resetPage();
@@ -23,7 +25,8 @@ function onSearchFormSubmit(event) {
     .then(({ hits }) => {
       if (pixabay.query !== '') {
         event.target.reset();
-      } else if (hits.length === 0 || pixabay.query === '') {
+      }
+      if (hits.length === 0 || pixabay.query === '') {
         return Report.info(
           'INFO',
           'Sorry, there are no images matching your search query. Please try again.'
@@ -50,6 +53,8 @@ let options = {
 
 let observer = new IntersectionObserver(onLoad, options);
 function onLoad(entries, observer) {
+  console.log('su');
+
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       upButtonVisible();
