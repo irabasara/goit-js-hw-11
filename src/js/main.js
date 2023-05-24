@@ -21,7 +21,9 @@ function onSearchFormSubmit(event) {
   pixabay
     .fetchImages()
     .then(({ hits }) => {
-      if (hits.length === 0 || pixabay.query === '') {
+      if (pixabay.query !== '') {
+        event.target.reset();
+      } else if (hits.length === 0 || pixabay.query === '') {
         return Report.info(
           'INFO',
           'Sorry, there are no images matching your search query. Please try again.'
